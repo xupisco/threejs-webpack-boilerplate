@@ -4,7 +4,7 @@ const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 
 module.exports = {
-    entry: path.resolve(__dirname, '../src/script.js'),
+    entry: path.resolve(__dirname, '../src/js/script.js'),
     output: {
         hashFunction: 'xxhash64',
         filename: 'bundle.[contenthash].js',
@@ -36,18 +36,34 @@ module.exports = {
             // JS
             {
                 test: /\.js$/,
+                include: path.resolve(__dirname, '../src/js'),
                 exclude: /node_modules/,
-                use: [
-                    'babel-loader'
-                ]
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
             },
 
             // CSS
             {
                 test: /\.css$/,
+                include: path.resolve(__dirname, '../src/css'),
                 use: [
                     MiniCSSExtractPlugin.loader,
-                    'css-loader'
+                    'css-loader',
+                ]
+            },
+
+            // SCSS
+            {
+                test: /\.scss$/,
+                include: path.resolve(__dirname, '../src/scss'),
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader'
                 ]
             },
 

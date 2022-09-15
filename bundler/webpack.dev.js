@@ -32,8 +32,8 @@ module.exports = merge(
                 progress: false
             },
             setupMiddlewares: function (middlewares, devServer) {
-                console.log('------------------------------------------------------------')
-                console.log(devServer.options.host)
+                console.log('------------------')
+                //console.log(devServer.options.host)
                 const port = devServer.options.port
                 const https = devServer.options.https ? 's' : ''
                 const domain1 = `http${https}://${devServer.options.host}:${port}`
